@@ -1,0 +1,2 @@
+# SynthSegContainer
+Containerized SynthSeg
