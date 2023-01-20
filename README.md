@@ -41,12 +41,13 @@ This has been tested on Singularity 3.8.4, it may not work with older versions.
 
 The authors ask that if it is used in published research, to cite:
 
-SynthSeg: Domain Randomisation for Segmentation of Brain MRI Scans of any Contrast and Resolution 
-B. Billot, D.N. Greve, O. Puonti, A. Thielscher, K. Van Leemput, B. Fischl, A.V. Dalca, J.E. Iglesias 
-[arxiv | bibtex]
+SynthSeg: Domain Randomisation for Segmentation of Brain MRI Scans of any
+Contrast and Resolution 
+B. Billot, D.N. Greve, O. Puonti, A. Thielscher, K. Van Leemput, B. Fischl, A.V.
+Dalca, J.E. Iglesias [arxiv](https://arxiv.org/abs/2107.09559)
 
 For cortical parcellation, automated QC, or robust fitting, please cite the following paper:
 
 Robust Segmentation of Brain MRI in the Wild with Hierarchical CNNs and no Retraining 
-B. Billot, M. Colin, S.E. Arnold, S. Das, J.E. Iglesias 
-MICCAI 2022  
+B. Billot, M. Colin, S.E. Arnold, S. Das, J.E. Iglesias [MICCAI
+2022](https://link.springer.com/chapter/10.1007/978-3-031-16443-9_52)
