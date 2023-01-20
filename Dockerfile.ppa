@@ -1,0 +1,36 @@
+FROM nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04
+
+RUN apt-get update && \
+    apt-get install -y \
+      build-essential \
+      git \
+      software-properties-common \
+      wget
+
+RUN add-apt-repository ppa:deadsnakes/ppa  && \
+    apt-get install -y python3.8 \
+      python3.8-dev \
+      python3.8-distutils \
+      python3.8-venv
+
+RUN cd /opt && \
+    wget https://bootstrap.pypa.io/get-pip.py && \
+    python3.8 get-pip.py && \
+    pip install --upgrade pip
+
+RUN git clone https://github.com/BBillot/SynthSeg.git /opt/SynthSeg && \
+    python3.8 -m venv /opt/venv && \
+      . /opt/venv/bin/activate && \
+    pip install --requirement /opt/SynthSeg/requirements_python3.8.txt
+
+COPY synthseg_models/*.h5 /opt/SynthSeg/models/
+
+ENV VIRTUAL_ENV=/opt/venv
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+
+LABEL maintainer="Philip A Cook (https://github.com/cookpa)" \
+      description="Container for SynthSeg. Please see SynthSeg repository for citations" \
+      synthseg_repo="https://github.com/BBillot/SynthSeg"
+
+ENTRYPOINT ["python3.8", "/opt/SynthSeg/scripts/commands/SynthSeg_predict.py"]
+

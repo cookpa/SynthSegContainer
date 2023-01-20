@@ -1,0 +1,29 @@
+#
+# Building here without CUDA
+#
+#
+FROM python:3.8.12-buster as builder
+
+ENV VIRTUAL_ENV=/opt/venv
+
+RUN apt-get update && \
+    python3 -m venv ${VIRTUAL_ENV} && \
+    . ${VIRTUAL_ENV}/bin/activate && \
+    git clone https://github.com/BBillot/SynthSeg.git /opt/SynthSeg && \
+    pip install --requirement /opt/SynthSeg/requirements_python3.8.txt
+
+FROM python:3.8.12-slim-buster
+
+ENV VIRTUAL_ENV=/opt/venv
+ENV PATH="${VIRTUAL_ENV}/bin:$PATH"
+
+COPY --from=builder /opt/SynthSeg /opt/SynthSeg/
+COPY --from=builder ${VIRTUAL_ENV} ${VIRTUAL_ENV}
+
+COPY synthseg_models/*.h5 /opt/SynthSeg/models/
+
+LABEL maintainer="Philip A Cook (https://github.com/cookpa)" \
+      description="Container for SynthSeg. Please see SynthSeg repository for citations" \
+      synthseg_repo="https://github.com/BBillot/SynthSeg"
+
+ENTRYPOINT ["python3", "/opt/SynthSeg/scripts/commands/SynthSeg_predict.py"]
