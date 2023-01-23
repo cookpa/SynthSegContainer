@@ -9,7 +9,9 @@ ENV VIRTUAL_ENV=/opt/venv
 RUN apt-get update && \
     python3 -m venv ${VIRTUAL_ENV} && \
     . ${VIRTUAL_ENV}/bin/activate && \
-    git clone https://github.com/BBillot/SynthSeg.git /opt/SynthSeg && \
+    git clone -b master --depth 1 https://github.com/BBillot/SynthSeg.git /opt/SynthSeg && \
+    cd /opt/SynthSeg && \
+    git log > synthseg_version.txt && \
     pip install --requirement /opt/SynthSeg/requirements_python3.8.txt
 
 FROM python:3.8.12-slim-buster
