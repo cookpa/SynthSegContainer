@@ -1,6 +1,7 @@
 #
 # Building here without CUDA
 #
+# This builds a CPU-only version for generic architecture
 #
 FROM python:3.8.12-buster as builder
 
