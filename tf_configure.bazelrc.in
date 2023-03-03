@@ -1,7 +1,6 @@
 build --action_env PYTHON_BIN_PATH="/usr/local/bin/python"
 build --action_env PYTHON_LIB_PATH="/usr/local/lib/python3.8/dist-packages"
 build --python_path="/usr/local/bin/python"
-build --config=xla
 build:opt --copt=-march=native
 build:opt --copt=-Wno-sign-compare
 build:opt --host_copt=-march=native

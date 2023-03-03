@@ -1,0 +1,13 @@
+name: synthseg-deps
+channels:
+  - conda-forge
+dependencies:
+  - python=3.8.16
+  - Keras=2.3.1
+  - Keras-Applications=1.0.8
+  - numpy=1.18.5
+  - tensorflow-gpu=2.2.0
+  - tensorflow-estimator=2.2.0
+  - pip
+  - pip:
+    - -r file:conda_requirements.txt

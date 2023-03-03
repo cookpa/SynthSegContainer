@@ -13,6 +13,11 @@ RUN mkdir /src && \
 COPY tf_configure.bazelrc.in /src/tensorflow/.tf_configure.bazelrc
 
 # Build and test tensorflow
+# https://www.tensorflow.org/install/source
+# https://www.intel.com/content/www/us/en/developer/articles/guide/optimization-for-tensorflow-installation-guide.html
+#
+# We use tensorflow's options here, though I think Intels are equivalent, but Intel's specify
+# optimization here rather than in the .tf_configure.bazelrc
 RUN mkdir /opt/tensorflow && \
     cd /src/tensorflow && \
     bazel build --config=mkl --config=opt //tensorflow/tools/pip_package:build_pip_package && \
@@ -37,6 +42,7 @@ COPY intel_requirements_python3.8.txt /opt/SynthSeg/
 
 RUN . ${VIRTUAL_ENV}/bin/activate && \
     pip install wheel && \
+    pip install --upgrade pip && \
     pip install --requirement /opt/SynthSeg/intel_requirements_python3.8.txt
 
 FROM tensorflow/tensorflow:devel

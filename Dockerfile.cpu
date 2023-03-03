@@ -3,7 +3,7 @@
 #
 # This builds a CPU-only version for generic architecture
 #
-FROM python:3.8.12-buster as builder
+FROM python:3.8.15-buster as builder
 
 ENV VIRTUAL_ENV=/opt/venv
 
@@ -15,7 +15,7 @@ RUN apt-get update && \
     git log > synthseg_version.txt && \
     pip install --requirement /opt/SynthSeg/requirements_python3.8.txt
 
-FROM python:3.8.12-slim-buster
+FROM python:3.8.15-slim-buster
 
 ENV VIRTUAL_ENV=/opt/venv
 ENV PATH="${VIRTUAL_ENV}/bin:$PATH"

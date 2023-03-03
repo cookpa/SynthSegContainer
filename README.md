@@ -10,30 +10,47 @@ them in `synthseg_models/`.
 
 Then, build with one of the available Dockerfiles.
 
-## Dockerfile.cuda
+## Dockerfile.conda
 
-This file uses a PPA from the "deadsnakes" group, because the official
-Ubuntu packages for python3.8 lead to errors with the dependencies.
+Installs tensorflow-gpu from conda, which includes GPU support.
 
-The base image provides CUDA 10.1 and cuDNN 7.0. The SynthSeg page says to use Cuda
-10.0, but that did not work for me.
+This also runs without the GPU. MKL support is disabled, which extends execution
+time (to about 8-10 min) but massively reduces the memory requirements.
+
+The conda tensorflow installs some of the dependencies listed in [SynthSeg's requirements
+for Python
+3.8](https://github.com/BBillot/SynthSeg/blob/master/requirements_python3.8.txt). Some of
+these are later versions than the SynthSeg requirements file specified. In cases
+where deviating from SynthSeg's exact versions caused obvious problems, the specific
+version was explicitly added to the conda list.
+
+Pip is used to install remaining requirements that are not installed with tensorflow.
 
 
-## Dockerfile.cpu
+## Dockerfile.conda.mkl
 
-This uses a smaller base image with official Python 3.8 and without CUDA, for users that
-don't need to run on the GPU.
+Installs tensorflow-mkl, which uses MKL optimizations. This is 2-3x faster than
+the non-MKL tensorflow, but it requires MUCH more memory. The memory use can be reduced
+with the environment variable
+[MKL_DISABLE_FAST_MM](https://www.intel.com/content/www/us/en/develop/documentation/onemkl-developer-reference-c/top/support-functions/memory-management/mkl-disable-fast-mm.html)
+but even still, with the default crops, memory use peaks at around 40 Gb.
+
+
+# Dockerfile.cpu
+
+This builds a CPU-only version from source, but uses pip for everything. This means it can
+install the requirements file directly from SynthSeg.
 
 
 # Dockerfile.tfsrc
 
-This builds without CUDA, but enhances CPU performance by building tensorflow from source.
-This takes longer and by default optimizes the tensorflow binary for "native"
+This builds without CUDA, but enhances CPU optimization by building tensorflow from
+source. This takes longer and by default optimizes the tensorflow binary for "native"
 architecture. This is customizable by changing the configuration options in
 `tf_configure.bazelrc.in`.
 
-Natively optimized tensorflow operations are much faster, for SynthSeg the speedup is
-about 4x on a new Intel i7 CPU. But it does make the container less portable.
+I'm not sure how much this helps, it doesn't seem much faster than the conda
+tensorflow-mkl version.
 
 
 ## Usage
@@ -50,8 +67,7 @@ Available on
 
 ## Singularity
 
-For GPU support, build from synthseg:cuda-latest and run with `singularity --nv`.
-This has been tested on Singularity 3.8.4, it may not work with older versions.
+For GPU support, build from synthseg:conda-latest and run with `singularity --nv`.
 
 
 ## Licensing and citations
