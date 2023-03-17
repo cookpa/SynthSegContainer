@@ -12,7 +12,8 @@ Then, build with one of the available Dockerfiles.
 
 ## Dockerfile.conda
 
-Installs tensorflow-gpu from conda, which includes GPU support.
+Installs tensorflow-gpu from conda, which includes GPU support. This works for Singularity
+containers with `singularity run --nv`.
 
 This also runs without the GPU. MKL support is disabled, which extends execution
 time (to about 8-10 min) but massively reduces the memory requirements.
@@ -27,6 +28,12 @@ version was explicitly added to the conda list.
 Pip is used to install remaining requirements that are not installed with tensorflow.
 
 
+## Dockerfile.conda-cuda
+
+As above, but use a cuda runtime layer. Possibly useful for use with the GPU in Docker,
+rather than Singularity.
+
+
 ## Dockerfile.conda.mkl
 
 Installs tensorflow-mkl, which uses MKL optimizations. This is 2-3x faster than
@@ -39,7 +46,7 @@ but even still, with the default crops, memory use peaks at around 40 Gb.
 # Dockerfile.cpu
 
 This builds a CPU-only version from source, but uses pip for everything. This means it can
-install the requirements file directly from SynthSeg.
+install the requirements file directly from SynthSeg. Probably obsolete now, prefer conda.
 
 
 # Dockerfile.tfsrc

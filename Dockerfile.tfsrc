@@ -18,9 +18,13 @@ COPY tf_configure.bazelrc.in /src/tensorflow/.tf_configure.bazelrc
 #
 # We use tensorflow's options here, though I think Intels are equivalent, but Intel's specify
 # optimization here rather than in the .tf_configure.bazelrc
+#
+# MKL massively increases memory footprint. Remove mkl config to build with native CPU optimizations
+# only.
+#
 RUN mkdir /opt/tensorflow && \
     cd /src/tensorflow && \
-    bazel build --config=mkl --config=opt //tensorflow/tools/pip_package:build_pip_package && \
+    bazel build -c opt --config=mkl --config=opt //tensorflow/tools/pip_package:build_pip_package && \
     ./bazel-bin/tensorflow/tools/pip_package/build_pip_package /opt/tensorflow && \
     pip uninstall tensorflow && \
     pip install /opt/tensorflow/tensorflow-2.2.0-cp38-cp38-linux_x86_64.whl && \
@@ -28,7 +32,6 @@ RUN mkdir /opt/tensorflow && \
     python -c "import tensorflow as tf; print(tf.__version__)"
 
 ENV VIRTUAL_ENV=/opt/venv
-
 
 RUN apt-get update && \
     apt install -y python3.8-venv && \

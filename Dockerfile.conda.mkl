@@ -1,6 +1,6 @@
 #
 # This builds using conda.
-# The Conda tensorflow is supposedly faster than pip's version
+# The Conda tensorflow-mkl is faster than pip's version
 # because it includes MKL
 FROM continuumio/miniconda3:4.12.0 AS builder
 
@@ -23,7 +23,7 @@ RUN git clone -b master --depth 1 https://github.com/BBillot/SynthSeg.git /opt/S
     cd /opt/SynthSeg && \
     git log > synthseg_version.txt
 
-FROM python:3.8.12-slim-buster
+FROM python:3.8.16-slim-buster
 
 # Copy venv from the previous stage:
 COPY --from=builder /opt/venv /opt/venv

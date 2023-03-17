@@ -1,5 +1,5 @@
 #
-# This builds using conda.
+# This builds using conda, and installs into a cuda runtime layer
 FROM continuumio/miniconda3:4.12.0 AS builder
 
 COPY environment.yml conda_requirements.txt ./
@@ -21,7 +21,7 @@ RUN git clone -b master --depth 1 https://github.com/BBillot/SynthSeg.git /opt/S
     cd /opt/SynthSeg && \
     git log > synthseg_version.txt
 
-FROM python:3.8.16-slim-buster
+FROM nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04
 
 # Copy venv from the previous stage:
 COPY --from=builder /opt/venv /opt/venv
