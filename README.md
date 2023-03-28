@@ -72,9 +72,10 @@ The authors ask that if it is used in published research, to cite:
 SynthSeg: Domain Randomisation for Segmentation of Brain MRI Scans of any
 Contrast and Resolution
 B. Billot, D.N. Greve, O. Puonti, A. Thielscher, K. Van Leemput, B. Fischl, A.V.
-Dalca, J.E. Iglesias [arxiv](https://arxiv.org/abs/2107.09559)
+Dalca, J.E. Iglesias (https://pubmed.ncbi.nlm.nih.gov/36857946/)
 
-For cortical parcellation, automated QC, or robust fitting, please cite the following paper:
+For cortical parcellation, automated QC, or robust fitting, please also cite the following
+paper:
 
 Robust Segmentation of Brain MRI in the Wild with Hierarchical CNNs and no Retraining
 B. Billot, M. Colin, S.E. Arnold, S. Das, J.E. Iglesias [MICCAI
