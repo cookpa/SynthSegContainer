@@ -20,7 +20,7 @@ COPY tf_configure.bazelrc.in /src/tensorflow/.tf_configure.bazelrc
 # optimization here rather than in the .tf_configure.bazelrc
 #
 # MKL massively increases memory footprint. Remove mkl config to build with native CPU optimizations
-# only.
+# only - might not be much faster
 #
 RUN mkdir /opt/tensorflow && \
     cd /src/tensorflow && \
@@ -46,7 +46,9 @@ COPY intel_requirements_python3.8.txt /opt/SynthSeg/
 RUN . ${VIRTUAL_ENV}/bin/activate && \
     pip install wheel && \
     pip install --upgrade pip && \
-    pip install --requirement /opt/SynthSeg/intel_requirements_python3.8.txt
+    pip install keras==2.3.1 protobuf==3.20.3 numpy==1.23.5 \
+      nibabel==5.0.1 matplotlib-base==3.6.2 \
+      /opt/tensorflow/tensorflow-2.2.0-cp38-cp38-linux_x86_64.whl
 
 FROM tensorflow/tensorflow:devel
 
@@ -65,7 +67,8 @@ COPY --from=builder ${VIRTUAL_ENV} ${VIRTUAL_ENV}
 COPY synthseg_models/*.h5 /opt/SynthSeg/models/
 
 LABEL maintainer="Philip A Cook (https://github.com/cookpa)" \
-      description="Container for SynthSeg, with tensorflow built from source on Intel I7-1068NG7. Please see SynthSeg repository for citations" \
+      description="Container for SynthSeg, with tensorflow built from source on Intel with AVX2 optimization. \
+        Please see SynthSeg repository for citations" \
       synthseg_repo="https://github.com/BBillot/SynthSeg"
 
 ENTRYPOINT ["python", "/opt/SynthSeg/scripts/commands/SynthSeg_predict.py"]
