@@ -4,11 +4,12 @@ Containerized [SynthSeg](https://github.com/BBillot/SynthSeg).
 
 ## Building with docker
 
-Before building, download the models as instructed in step 3 of the [SynthSeg
+Before building, download the models as instructed in the [SynthSeg
 installation instructions](https://github.com/BBillot/SynthSeg#installation) and place
 them in `synthseg_models/`.
 
 Then, build with one of the available Dockerfiles.
+
 
 ## Dockerfile.conda
 
@@ -17,15 +18,6 @@ containers with `singularity run --nv`.
 
 This also runs without the GPU. MKL support is disabled, which extends execution
 time (to about 8-10 min) but massively reduces the memory requirements.
-
-The conda tensorflow installs some of the dependencies listed in [SynthSeg's requirements
-for Python
-3.8](https://github.com/BBillot/SynthSeg/blob/master/requirements_python3.8.txt). Some of
-these are later versions than the SynthSeg requirements file specified. In cases
-where deviating from SynthSeg's exact versions caused obvious problems, the specific
-version was explicitly added to the conda list.
-
-Pip is used to install remaining requirements that are not installed with tensorflow.
 
 
 ## Dockerfile.conda-cuda
@@ -41,12 +33,6 @@ the non-MKL tensorflow, but it requires MUCH more memory. The memory use can be 
 with the environment variable
 [MKL_DISABLE_FAST_MM](https://www.intel.com/content/www/us/en/develop/documentation/onemkl-developer-reference-c/top/support-functions/memory-management/mkl-disable-fast-mm.html)
 but even still, with the default crops, memory use peaks at around 40 Gb.
-
-
-# Dockerfile.cpu
-
-This builds a CPU-only version from source, but uses pip for everything. This means it can
-install the requirements file directly from SynthSeg. Probably obsolete now, prefer conda.
 
 
 # Dockerfile.tfsrc
