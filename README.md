@@ -2,6 +2,9 @@
 
 Containerized [SynthSeg](https://github.com/BBillot/SynthSeg).
 
+[Containers on
+DockerHub](https://hub.docker.com/repository/docker/cookpa/synthseg/general).
+
 ## Building with docker
 
 Before building, download the models as instructed in the [SynthSeg
@@ -44,6 +47,9 @@ architecture. This is customizable by changing the configuration options in
 
 I'm not sure how much this helps, it doesn't seem much faster than the conda
 tensorflow-mkl version.
+
+This dockerfile has not been updated to reflect the simplified requirements
+provided by SynthSeg developers in March 2023.
 
 
 ## Usage
