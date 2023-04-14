@@ -38,7 +38,7 @@ with the environment variable
 but even still, with the default crops, memory use peaks at around 40 Gb.
 
 
-# Dockerfile.tfsrc
+## Dockerfile.tfsrc
 
 This builds without CUDA, but enhances CPU optimization by building tensorflow from
 source. This takes longer and by default optimizes the tensorflow binary for "native"
