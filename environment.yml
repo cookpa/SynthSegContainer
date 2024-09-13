@@ -6,5 +6,5 @@ dependencies:
   - python=3.8.16
   - keras=2.3.1
   - matplotlib-base
-  - nibabel
+  - nibabel=4.0.2
   - tensorflow-gpu=2.2.0
