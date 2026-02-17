@@ -7,11 +7,13 @@ DockerHub](https://hub.docker.com/repository/docker/cookpa/synthseg/general).
 
 ## Building with docker
 
-Before building, download the models as instructed in the [SynthSeg
-installation instructions](https://github.com/BBillot/SynthSeg#installation) and place
-them in `synthseg_models/`.
+Before building, download the models from this link provided by [Ben
+Billot](https://mitprod-my.sharepoint.com/personal/bbillot_mit_edu/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fbbillot%5Fmit%5Fedu%2FDocuments).
 
-Then, build with one of the available Dockerfiles.
+The links in the main SynthSeg repository are no longer valid.
+
+Copy the model files to the `synthseg_models` directory in this repository before
+building.
 
 
 ## Dockerfile.conda
