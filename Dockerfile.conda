@@ -2,8 +2,10 @@
 # This builds using conda.
 FROM continuumio/miniconda3:4.12.0 AS builder
 
-COPY environment.yml ./
-RUN conda env create -f environment.yml
+COPY environment.yml /tmp/environment.yml
+COPY requirements_python3.8.txt /tmp/synthseg_requirements.txt
+
+RUN conda env create -f /tmp/environment.yml --verbose
 
 # Install conda-pack:
 RUN conda install -c conda-forge conda-pack
