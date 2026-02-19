@@ -15,8 +15,11 @@ The links in the main SynthSeg repository are no longer valid.
 Copy the model files to the `synthseg_models` directory in this repository before
 building.
 
+The recommended way to build the container is with the `Dockerfile.conda` file, which
+installs tensorflow-gpu from conda. The other docker files were various attempts to
+optimize performance, but none of them really paid off.
 
-## Dockerfile.conda
+### Dockerfile.conda
 
 Installs tensorflow-gpu from conda, which includes GPU support. This works for Singularity
 containers with `singularity run --nv`.
@@ -24,6 +27,11 @@ containers with `singularity run --nv`.
 This also runs without the GPU. MKL support is disabled, which extends execution
 time (to about 8-10 min) but massively reduces the memory requirements.
 
+
+## Experimental docker files
+
+These haven't been built in quite some time, and may no longer work because of changes to
+python package dependencies.
 
 ## Dockerfile.conda-cuda
 
