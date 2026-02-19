@@ -93,6 +93,5 @@ Dalca, J.E. Iglesias (https://pubmed.ncbi.nlm.nih.gov/36857946/)
 For cortical parcellation, automated QC, or robust fitting, please also cite the following
 paper:
 
-Robust Segmentation of Brain MRI in the Wild with Hierarchical CNNs and no Retraining
-B. Billot, M. Colin, S.E. Arnold, S. Das, J.E. Iglesias [MICCAI
-2022](https://link.springer.com/chapter/10.1007/978-3-031-16443-9_52)
+Robust machine learning segmentation for large-scale analysis of heterogeneous clinical brain MRI datasets
+B. Billot, C. Magdamo, Y. Cheng, S.E. Arnold, S. Das, J.E. Iglesias (https://pubmed.ncbi.nlm.nih.gov/36802420/)
